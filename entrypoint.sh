@@ -23,7 +23,7 @@ if [[ ${AUTO_UPDATE} == "1" ]] && [[ ${UPDATE_PLUGINS} == "1" ]]; then
         echo -e "STARTUP: Plugin installation is completed!"
         fi
     echo -e "STARTUP: Checking for game and plugins updates..."
-    umod update -P game core apps extensions --patch-available --strict
+    umod update -P game core apps extensions plugins --patch-available --strict
     echo -e "STARTUP: Game server and uMod update is complete!"
 fi
 
