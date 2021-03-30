@@ -12,24 +12,24 @@ export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
 # Check if launcher exists, if not then create one
 if [ ! -f valheim_server.x86_64 ]; then
     echo "STARTUP:Launcher does not exist, creating new one..."
-    umod new launcher valheim -P --force
+    umod new launcher valheim -P --force --working-directory=/home/container
 fi
 
 # Update Valheim and uMod
 if [[ ${AUTO_UPDATE} == "1" ]] && [[ ${UPDATE_PLUGINS} == "1" ]]; then
         if [[ ! -z ${INSTALL_PLUGINS} ]]; then
         echo -e "STARTUP: Plugins configured, installing Plugins: ${INSTALL_PLUGINS}"
-        umod require ${INSTALL_PLUGINS} 
+        umod require ${INSTALL_PLUGINS} --working-directory=/home/container
         echo -e "STARTUP: Plugin installation is completed!"
         fi
     echo -e "STARTUP: Checking for game and plugins updates..."
-    umod update -P game core apps extensions plugins --patch-available --strict
+    umod update -P game core apps extensions plugins --patch-available --strict --working-directory=/home/container
     echo -e "STARTUP: Game server and uMod update is complete!"
 fi
 
 if [[ ${AUTO_UPDATE} == "1" ]] && [[ ${UPDATE_PLUGINS} == "0" ]]; then
     echo -e "STARTUP: Updating game and uMod, ignoring plugin updates as update plugins is set to 0..."
-    umod update -P game core apps extensions --patch-available
+    umod update -P game core apps extensions --patch-available --working-directory=/home/container
     #umod update core apps extensions --patch-available --strict --validate --prerelease
     echo -e "STARTUP: Game server and uMod update is complete!"
 fi
@@ -37,11 +37,11 @@ fi
 if [[ ${AUTO_UPDATE} == "0" ]] && [[ ${UPDATE_PLUGINS} == "1" ]]; then
     if [[ ! -z ${INSTALL_PLUGINS} ]]; then
     echo -e "STARTUP: Found configured Plugins, checking if they are not installed: ${INSTALL_PLUGINS}"
-    umod require ${INSTALL_PLUGINS} 
+    umod require ${INSTALL_PLUGINS} --working-directory=/home/container
     echo -e "STARTUP: Plugin installation is completed!"
     fi
     echo -e "STARTUP: Updating plugins, ignoring game and uMod updates as auto update is set to 0..."
-    umod update plugins
+    umod update plugins --working-directory=/home/container
     echo -e "STARTUP: Plugin updates are completed!"
 fi
 
@@ -51,7 +51,7 @@ fi
 
 if [[ ! -z ${INSTALL_PLUGINS} ]]; then
     echo -e "STARTUP: Found configured Plugins, installing Plugins: ${INSTALL_PLUGINS}"
-    umod require ${INSTALL_PLUGINS} 
+    umod require ${INSTALL_PLUGINS} --working-directory=/home/container
     echo -e "STARTUP: Plugin installation is completed!"
 fi
 
