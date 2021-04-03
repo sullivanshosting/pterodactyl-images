@@ -4,8 +4,6 @@ LABEL   author="Softwarenoob" maintainer="admin@softwarenoob.com"
 
 ENV     DEBIAN_FRONTEND noninteractive
 
-RUN useradd -m -d /home/container -s /bin/bash container
-
 RUN ln -s /home/container/ /nonexistent
 
 RUN     apt update -y \
@@ -13,7 +11,7 @@ RUN     apt update -y \
         && wget https://packages.microsoft.com/config/debian/10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
         && dpkg -i packages-microsoft-prod.deb \
         && apt update -y \
-        && apt install -y dotnet-sdk-5.0 aspnetcore-runtime-5.0 libgdiplus
+        && apt install -y dotnet-sdk-5.0 aspnetcore-runtime-5.0 libgdiplus tzdata
         
 
 USER    container
