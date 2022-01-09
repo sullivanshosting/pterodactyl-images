@@ -39,4 +39,4 @@ jobs:
           platforms: linux/arm64
           push: true
           tags: |
-            ghcr.io/software-noob/arm64:java_${{ matrix.tag }}
+            ghcr.io/sullivanshosting/arm64:java_${{ matrix.tag }}

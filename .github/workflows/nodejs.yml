@@ -41,4 +41,4 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-            ghcr.io/software-noob/pterodactyl-images:nodejs_${{ matrix.tag }}
+            ghcr.io/sullivanshosting/pterodactyl-images:nodejs_${{ matrix.tag }}
